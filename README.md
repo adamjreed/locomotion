@@ -1,23 +1,10 @@
 # locomotion 
 
-This application is a live view of trains currently active on major cities' mass transit systems. It is intended to serve as a demo of 
-how you can harness the power of serverless applications and simple single-page-app frontends to quickly visualize interesting data sets. A few things of note about the architecture:
+This application is a live view of trains currently active on major cities' mass transit systems. It features a few pretty cool concepts:
 
-* The ETL layer is all automatic and can be run via crons and expanded by only entering new resources to fetch.
-* Apart from the Redis instance, the entire application is only billed when things are in flight. If there are no users and no data is being actively ingested or transformed, the app has virtually zero cost.
-* The frontend being on a CDN and the backend using Elasticache means that this is rapidly scalable to large amounts of traffic.
-
-## Components
-The application has 3 fundamental components:
-
-### ETL
-The bedrock of the application is a serverless ETL layer that uses Lambda functions to fetch static GTFS transit data from mass transit systems (see more on GTFS [here](https://developers.google.com/transit/gtfs)) and transform it using Amazon Glue and Athena. Once transformed, the data is periodically updated in a Redis server which is queried by the backend API.
-
-### API
-The API layer provides a set of common endpoints for the frontend to call, which then translate to both static data from Redis and dynamic data from live APIs hosted by mass transit systems.
-
-### Frontend
-The frontend layer is a React application that presents an interactive map to the user displaying all active trains for a given region.
+* An ETL layer that is entirely serverless and automatically processes [GTFS](https://developers.google.com/transit/gtfs) feeds to provide the static data necessary.
+* A low-latency serverless API that uses Lambda and Elasticache (Redis) to serve end-user requests and not overwhelm mass transit providers' APIs with polling.
+* A CDN-hosted React application that uses the Google Maps framework to visualize a combination of static live train data to display the real time position of trains on the tracks.
 
 ## TODO
 This application is in a very early state and obviously has a lot of future potential. 
