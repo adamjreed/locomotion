@@ -4,7 +4,7 @@ This application is a live view of trains currently active on major cities' mass
 
 * An ETL layer that is entirely serverless and automatically processes [GTFS](https://developers.google.com/transit/gtfs) feeds to provide the static data necessary.
 * A low-latency serverless API that uses Lambda and Elasticache (Redis) to serve end-user requests and not overwhelm mass transit providers' APIs with polling.
-* A CDN-hosted React application that uses the Google Maps framework to visualize a combination of static live train data to display the real time position of trains on the tracks.
+* A CDN-hosted React application that uses the Google Maps framework to visualize a combination of static and live train data to display the real time position of trains on the tracks.
 
 ## TODO
 This application is in a very early state and obviously has a lot of future potential. 
