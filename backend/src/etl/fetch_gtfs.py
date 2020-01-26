@@ -9,10 +9,10 @@ import boto3
 def handler(event, context):
     s3 = boto3.resource('s3')
     bucketName = os.environ["BUCKET_NAME"]
-    bucketPrefix = os.environ["BUCKET_PREFIX"]
+    bucketPrefix = event["city"] + "/"
     date = datetime.now()
 
-    resp = urlopen(os.environ["FEED_URL"])
+    resp = urlopen(event["feed_url"])
     lastModified = resp.info()["Last-Modified"]
 
     print("last modified: " + lastModified)

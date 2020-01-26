@@ -18,3 +18,7 @@ var/
 
 # Serverless directories
 .serverless
+
+# Vendor files
+node_modules
+venv
