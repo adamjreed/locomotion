@@ -1,6 +1,5 @@
 # locomotion 
 
-## Description
 This application is a live view of trains currently active on major cities' mass transit systems. It is intended to serve as a demo of 
 how you can harness the power of serverless applications and simple single-page-app frontends to quickly visualize interesting data sets. A few things of note about the architecture:
 
@@ -24,12 +23,12 @@ The frontend layer is a React application that presents an interactive map to th
 This application is in a very early state and obviously has a lot of future potential. 
 
 These are things that need to be done in order to reach what I'd consider an MVP:
-[] Error handling and reliability across the board (monitoring, retries, redundant nodes, etc)
-[] Unit and integration tests
-[] CI
-[] State management (probably Redux) on the frontend
+- [ ] Error handling and reliability across the board (monitoring, retries, redundant nodes, etc)
+- [ ] Unit and integration tests
+- [ ] CI
+- [ ] State management (probably Redux) on the frontend
 
 Here are a few things I'd like to add over time:
-[] More cities (just Chicago for now because their [developer resources](https://www.transitchicago.com/developers/) are awesome)
-[] Interactivity on stations and trains. Show upcoming trains for stations and show station estimates for trains.
-[] Reliability tracking on transit systems. Instead of just passing info to frontend, API saves it in a database and can report metrics like percentage on time per station, line, run, etc.
+- [ ] More cities (just Chicago for now because their [developer resources](https://www.transitchicago.com/developers/) are awesome)
+- [ ] Interactivity on stations and trains. Show upcoming trains for stations and show station estimates for trains.
+- [ ] Reliability tracking on transit systems. Instead of just passing info to frontend, API saves it in a database and can report metrics like percentage on time per station, line, run, etc.
