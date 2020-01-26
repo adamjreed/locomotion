@@ -1,0 +1,14 @@
+{
+	"bucket_name": "reedstudios-locomotion",
+	"secretsKey": "dev-locomotion-etl",
+	"vpc": {
+		"security_group": "sg-986405c9",
+	    "subnet1": "subnet-dd4aa2d3",
+	    "subnet2": "subnet-e27eb8af",
+	    "subnet3": "subnet-486d5166"
+	},
+	"redis": {
+		"host": "dev-locomotion.znpmhh.0001.use1.cache.amazonaws.com",
+		"port": "6379"
+	}
+}
