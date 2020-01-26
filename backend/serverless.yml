@@ -55,3 +55,13 @@ functions:
           enabled: false
           input:
             city: chicago
+  stations:
+    handler: src/api/stations.get
+    timeout: 30
+    environment:
+      REDIS_HOST: ${self:custom.config.redis.host}
+      REDIS_PORT: ${self:custom.config.redis.port}
+    events:
+      - http:
+          path: stations/{city}
+          method: get
