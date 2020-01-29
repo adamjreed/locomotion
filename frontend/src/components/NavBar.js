@@ -29,10 +29,14 @@ function NavBar(props) {
 		setAnchorEl(event.currentTarget);
 	};
 
+	const onMenuClose = () => {
+		setAnchorEl(null);
+	};
+
 	const onCitySelected = event => {
 		const { value } = event.currentTarget.dataset;
 		setCity(value);
-		setAnchorEl(null);
+		onMenuClose();
 	};
 
 	return (
@@ -61,6 +65,7 @@ function NavBar(props) {
 					anchorEl={anchorEl}
 					keepMounted
 					open={Boolean(anchorEl)}
+					onClose={onMenuClose}
 				>
 					<MenuItem data-value="Select A City" onClick={onCitySelected}>
 						<em>Select A City</em>
