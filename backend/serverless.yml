@@ -42,8 +42,14 @@ functions:
           input:
             city: chicago
             feed_url: https://www.transitchicago.com/downloads/sch_data/google_transit.zip
-  loadRedis:
-    handler: src/etl/load_redis.handler
+  loadCities:
+    handler: src/etl/load_redis.cities
+    timeout: 900
+    environment:
+      REDIS_HOST: ${self:custom.config.redis.host}
+      REDIS_PORT: ${self:custom.config.redis.port}
+  loadStations:
+    handler: src/etl/load_redis.stations
     timeout: 900
     environment:
       BUCKET_NAME: ${self:custom.config.bucket_name}
@@ -55,6 +61,16 @@ functions:
           enabled: false
           input:
             city: chicago
+  cities:
+    handler: src/api/cities.get
+    timeout: 30
+    environment:
+      REDIS_HOST: ${self:custom.config.redis.host}
+      REDIS_PORT: ${self:custom.config.redis.port}
+    events:
+      - http:
+          path: cities
+          method: get
   stations:
     handler: src/api/stations.get
     timeout: 30
@@ -63,5 +79,5 @@ functions:
       REDIS_PORT: ${self:custom.config.redis.port}
     events:
       - http:
-          path: stations/{city}
+          path: stations/{city_id}
           method: get

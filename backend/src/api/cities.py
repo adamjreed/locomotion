@@ -3,18 +3,17 @@ import json
 import redis
 
 def get(event, context):
-    city = event["pathParameters"]["city_id"]
     r = redis.Redis(host=os.environ["REDIS_HOST"], port=os.environ["REDIS_PORT"])
 
-    stations = r.get('stations_' + city)
+    cities = r.get('cities')
 
-    if stations == None:
+    if cities == None:
         return {
             "statusCode": 400,
-            "body": json.dumps({"error": "Invalid city"})
+            "body": json.dumps({"error": "No cities found"})
         }
 
     return {
         "statusCode": 200,
-        "body": stations
+        "body": cities
     }

@@ -3,7 +3,7 @@ import boto3
 import json
 import redis
 
-def handler(event, context):
+def stations(event, context):
     athena = boto3.client("athena")
     r = redis.Redis(host=os.environ["REDIS_HOST"], port=os.environ["REDIS_PORT"])
 
@@ -16,8 +16,6 @@ def handler(event, context):
             "OutputLocation": "s3://" + os.environ["BUCKET_NAME"] + "/" + event["city"] + "/"
         }
     )
-
-    print(queryStart)
 
     finalState = False
 
@@ -50,6 +48,13 @@ def handler(event, context):
         return r.set("stations_" + event["city"],json.dumps(parsedResults))
 
     return "Error executing Athena query: " + queryExecution["QueryExecution"]["Status"]["State"]
+
+def cities(event, context):
+    r = redis.Redis(host=os.environ["REDIS_HOST"], port=os.environ["REDIS_PORT"])
+
+    return r.set('cities', json.dumps([
+        {"id": "chicago", "name": "Chicago", "lat": 33.753816, "lng": -84.391531, "zoom": 12}
+    ]));
 
 def check_query_result(status):
     possible_statuses = {
