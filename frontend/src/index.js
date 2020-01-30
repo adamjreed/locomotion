@@ -1,7 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from 'react-dom'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import { createLogger } from 'redux-logger'
+import thunk from 'redux-thunk'
+import reducer from './reducers'
+import App from "./containers/App";
 import "./index.css";
-import App from "./App";
+import { getCities } from './actions'
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 
@@ -13,10 +19,24 @@ const theme = createMuiTheme({
 	}
 });
 
-ReactDOM.render(
+const middleware = [ thunk ];
+if (process.env.NODE_ENV !== 'production') {
+  middleware.push(createLogger());
+}
+
+const store = createStore(
+	reducer,
+	applyMiddleware(...middleware)
+);
+
+store.dispatch(getCities())
+
+render(
 	<React.Fragment>
 		<MuiThemeProvider theme={theme}>
-			<App />
+			<Provider store={store}>
+				<App />
+			</Provider>
 		</MuiThemeProvider>
 	</React.Fragment>,
 	document.getElementById("root")

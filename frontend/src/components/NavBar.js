@@ -7,11 +7,15 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import TramIcon from "./TramIcon.js"
 
 const useStyles = makeStyles(theme => ({
 	toolbar: {
 		flexWrap: "wrap"
 	},
+	toolbarIcon: {
+    marginRight: theme.spacing(1),
+  },
 	toolbarTitle: {
 		flexGrow: 1
 	},
@@ -20,10 +24,31 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function NavBar(props) {
+const NavBar = ({ currentCity, cities, onCitySelected }) => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
-	const [city, setCity] = React.useState("Select A City");
+	const hasCities = cities.length > 0;
+	const buttonText = currentCity ? currentCity.name : "Select A City"
+	const onMenuItemClick = (city) => {
+		onMenuClose();
+		onCitySelected(city);
+	}
+	const menuItems = hasCities ? (
+		[
+			<MenuItem key="select" onClick={() => onMenuItemClick(null)}>
+				Select A City
+			</MenuItem>,
+	    ...cities.map(city =>
+	      <MenuItem key={city.id} onClick={() => onMenuItemClick(city)}>
+					{city.name}
+				</MenuItem>
+	    )
+    ]
+  ) : (
+    <MenuItem>
+			<em>Loading cities...</em>
+		</MenuItem>
+  )
 
 	const onMenuOpen = event => {
 		setAnchorEl(event.currentTarget);
@@ -33,15 +58,10 @@ function NavBar(props) {
 		setAnchorEl(null);
 	};
 
-	const onCitySelected = event => {
-		const { value } = event.currentTarget.dataset;
-		setCity(value);
-		onMenuClose();
-	};
-
 	return (
 		<AppBar position="relative">
 			<Toolbar className={classes.toolbar}>
+				<TramIcon className={classes.toolbarIcon} />
 				<Typography
 					variant="h6"
 					color="inherit"
@@ -57,7 +77,7 @@ function NavBar(props) {
 					className={classes.toolbarButton}
 					color="inherit"
 				>
-					{city}
+					{buttonText}
 					<KeyboardArrowDownIcon />
 				</Button>
 				<Menu
@@ -67,12 +87,7 @@ function NavBar(props) {
 					open={Boolean(anchorEl)}
 					onClose={onMenuClose}
 				>
-					<MenuItem data-value="Select A City" onClick={onCitySelected}>
-						<em>Select A City</em>
-					</MenuItem>
-					<MenuItem data-value="Chicago" onClick={onCitySelected}>
-						Chicago
-					</MenuItem>
+					{menuItems}
 				</Menu>
 			</Toolbar>
 		</AppBar>

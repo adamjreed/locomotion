@@ -5,7 +5,7 @@ import Station from "./Station.js";
 const MapStyles = require("../data/map_styles.json");
 const stationData = require("../data/stations.json");
 
-function Map() {
+const Map = ({ currentCity }) => {
   //set state
   const [iconSize, setIconSize] = useState(21);
   const [map, setMap] = useState(null);
@@ -36,6 +36,7 @@ function Map() {
     const onZoomChanged = () => {
       if (map) {
         const zoomLevel = map.getZoom();
+        console.log(zoomLevel)
         let resize = 0;
 
         if (zoomLevel >= 12) {
@@ -48,8 +49,8 @@ function Map() {
 
     return (
       <GoogleMap
-        zoom={12}
-        center={{ lat: 33.753816, lng: -84.391531 }}
+        zoom={currentCity.zoom}
+        center={{ lat: currentCity.lat, lng: currentCity.lng }}
         options={{
           styles: MapStyles,
           mapTypeControl: false,
@@ -63,7 +64,6 @@ function Map() {
         onZoomChanged={onZoomChanged}
       >
         <TransitLayer />
-        {loadedStations}
       </GoogleMap>
     );
   };
@@ -72,7 +72,7 @@ function Map() {
     return <div>Map cannot be loaded right now, sorry.</div>;
   }
 
-  return isLoaded ? renderMap() : "<div>Loading...</div>";
+  return isLoaded && currentCity ? renderMap(currentCity) : <div>Loading...</div>;
 }
 
 export default Map;

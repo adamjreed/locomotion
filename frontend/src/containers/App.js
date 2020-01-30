@@ -1,7 +1,6 @@
 import React from "react";
-import "./App.css";
-import Map from "./components/Map.js";
-import NavBar from "./components/NavBar.js";
+import MapContainer from "../containers/MapContainer";
+import NavBarContainer from "../containers/NavBarContainer.js";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -24,14 +23,13 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
 	const classes = useStyles();
-	const [city, setCity] = React.useState("");
 
 	return (
 		<React.Fragment>
 			<CssBaseline />
 			<div className={classes.appContainer}>
-				<NavBar />
-				<Map />
+				<NavBarContainer />
+				<MapContainer />
 			</div>
 		</React.Fragment>
 	);
