@@ -1,4 +1,4 @@
-export default (state = {currentCity: null, cities: []}, action) => {
+export default (state = {map: null, currentCity: null, cities: []}, action) => {
   switch (action.type) {
     case 'RECEIVE_CITIES':
       return {
@@ -9,6 +9,11 @@ export default (state = {currentCity: null, cities: []}, action) => {
     	return {
     		...state,
     		currentCity: action.city
+    	}
+  	case 'SET_MAP':
+    	return {
+    		...state,
+    		map: action.map
     	}
     default:
       return state

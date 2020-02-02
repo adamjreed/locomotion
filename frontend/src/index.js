@@ -20,7 +20,7 @@ const theme = createMuiTheme({
 });
 
 const middleware = [ thunk ];
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.REACT_APP_STAGE !== 'prod') {
   middleware.push(createLogger());
 }
 

@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes'
+import api from '../api'
 
 const receiveCities = cities => ({
   type: types.RECEIVE_CITIES,
@@ -6,8 +7,9 @@ const receiveCities = cities => ({
 })
 
 export const getCities = () => dispatch => {
-	const cities = [{"id": "chicago", "name": "Chicago", "lat": 41.881939, "lng": -87.655529, "zoom": 13}];
-  dispatch(receiveCities(cities));
+	api.cities(cities => {
+		dispatch(receiveCities(cities));
+	})
 }
 
 const setCurrentCity = city => ({
@@ -17,4 +19,13 @@ const setCurrentCity = city => ({
 
 export const selectCity = city => (dispatch) => {
   dispatch(setCurrentCity(city))
+}
+
+const setMap = map => ({
+	type: types.SET_MAP,
+	map: map
+})
+
+export const mapSdkLoaded = map => (dispatch) => {
+  dispatch(setMap(map))
 }

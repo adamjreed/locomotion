@@ -5,10 +5,9 @@ import Station from "./Station.js";
 const MapStyles = require("../data/map_styles.json");
 const stationData = require("../data/stations.json");
 
-const Map = ({ currentCity }) => {
+const Map = ({ map, currentCity, mapSdkLoaded }) => {
   //set state
   const [iconSize, setIconSize] = useState(21);
-  const [map, setMap] = useState(null);
 
   //build array of stations
   const loadedStations = stationData.map((station, i) => {
@@ -27,10 +26,6 @@ const Map = ({ currentCity }) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY
   });
-
-  const onLoad = mapInstance => {
-    setMap(mapInstance);
-  };
 
   const renderMap = () => {
     const onZoomChanged = () => {
@@ -60,7 +55,7 @@ const Map = ({ currentCity }) => {
         mapContainerStyle={{
           flexGrow: 1
         }}
-        onLoad={onLoad}
+        onLoad={mapSdkLoaded}
         onZoomChanged={onZoomChanged}
       >
         <TransitLayer />
@@ -72,7 +67,13 @@ const Map = ({ currentCity }) => {
     return <div>Map cannot be loaded right now, sorry.</div>;
   }
 
-  return isLoaded && currentCity ? renderMap(currentCity) : <div>Loading...</div>;
+  if (!isLoaded) {
+    return <div>Loading maps...</div>
+  } else if (currentCity) {
+    return renderMap(currentCity)
+  }
+
+  return <div>Select A City...</div>;
 }
 
 export default Map;

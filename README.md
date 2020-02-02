@@ -17,12 +17,13 @@ MVP:
 - [ ] Build API for stations and live data
 - [x] React app to display a map
 - [ ] Show stations on map
-- [ ] Allow selection of cities dynamically
+- [x] Allow selection of cities dynamically
+- [ ] Build API proxy for third-party transit APIs
 - [ ] Render trains from live results
 - [ ] Animate trains on map
 
 These are things that need to be done in order to reach what I'd consider a production-ready app:
-- [ ] App hosted on CDN
+- [x] App hosted on CDN
 - [ ] DNS for app and api
 - [ ] Error handling and reliability across the board (monitoring, retries, redundant nodes, etc)
 - [ ] Unit and integration tests
@@ -30,6 +31,7 @@ These are things that need to be done in order to reach what I'd consider a prod
 - [ ] Better state management (probably Redux) on the frontend
 
 Here are a few features I'd like to add over time:
-- [ ] More cities (just Chicago for now because their [developer resources](https://www.transitchicago.com/developers/) are awesome)
-- [ ] Interactivity on stations and trains. Show upcoming trains for stations and show station estimates for trains.
+- [ ] Add some client-side state to preserve city selection across sessions.
+- [ ] More cities (just Chicago for now because their [developer resources](https://www.transitchicago.com/developers/) are awesome).
+- [ ] Interactivity on stations and trains. Show upcoming trains for stations and show station arrival estimates for trains.
 - [ ] Reliability tracking on transit systems. Instead of just passing info to frontend, API saves it in a database and can report metrics like percentage of on-time arrivals per station, line, run, etc.
