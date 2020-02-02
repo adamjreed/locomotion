@@ -12,20 +12,41 @@ export const getCities = () => dispatch => {
 	})
 }
 
-const setCurrentCity = city => ({
-	type: types.SET_CITY,
-	city: city
+const receiveStations = stations => ({
+  type: types.RECEIVE_STATIONS,
+  stations: stations
 })
 
-export const selectCity = city => (dispatch) => {
-  dispatch(setCurrentCity(city))
+export const getStations = (city) => dispatch => {
+	if(city) {
+		api.stations(city, (stations => {
+			dispatch(receiveStations(stations));
+		}))
+	} else {
+		dispatch(receiveStations([]))
+	}
 }
 
-const setMap = map => ({
-	type: types.SET_MAP,
-	map: map
-})
+export const setCity = city => (dispatch) => {
+  dispatch({
+		type: types.SET_CITY,
+		city: city
+	})
+		
+	dispatch(getStations(city ? city.id : null))
+}
 
-export const mapSdkLoaded = map => (dispatch) => {
-  dispatch(setMap(map))
+export const setMap = map => (dispatch) => {
+  dispatch({
+		type: types.SET_MAP,
+		map: map,
+		zoom: map.getZoom()
+	})
+}
+
+export const setZoom = zoom => (dispatch) => {
+	dispatch({
+		type: types.SET_ZOOM,
+		zoom: zoom
+	})
 }

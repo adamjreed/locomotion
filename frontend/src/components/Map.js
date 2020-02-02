@@ -1,44 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { GoogleMap, useLoadScript, TransitLayer } from "@react-google-maps/api";
-import Station from "./Station.js";
+import StationsContainer from '../containers/StationsContainer'
 
 const MapStyles = require("../data/map_styles.json");
-const stationData = require("../data/stations.json");
 
-const Map = ({ map, currentCity, mapSdkLoaded }) => {
-  //set state
-  const [iconSize, setIconSize] = useState(21);
+const Map = ({ map, currentCity, setMap, setZoom }) => {
 
-  //build array of stations
-  const loadedStations = stationData.map((station, i) => {
-    return (
-      <Station
-        key={i}
-        width={iconSize}
-        height={iconSize}
-        lat={station.lat}
-        lng={station.lng}
-      />
-    );
-  });
-
-  //load map
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY
   });
 
   const renderMap = () => {
     const onZoomChanged = () => {
+      //seems like this gets called before the map actually get initialized, 
+      //so let's check that it exists to be safe
       if (map) {
-        const zoomLevel = map.getZoom();
-        console.log(zoomLevel)
-        let resize = 0;
-
-        if (zoomLevel >= 12) {
-          resize = zoomLevel * 2 - 5;
-        }
-
-        setIconSize(resize);
+        setZoom(map.getZoom())
       }
     };
 
@@ -55,10 +32,11 @@ const Map = ({ map, currentCity, mapSdkLoaded }) => {
         mapContainerStyle={{
           flexGrow: 1
         }}
-        onLoad={mapSdkLoaded}
+        onLoad={setMap}
         onZoomChanged={onZoomChanged}
       >
         <TransitLayer />
+        <StationsContainer />
       </GoogleMap>
     );
   };

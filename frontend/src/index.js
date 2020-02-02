@@ -1,15 +1,16 @@
 import React from "react";
-import { render } from 'react-dom'
-import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import { createLogger } from 'redux-logger'
-import thunk from 'redux-thunk'
-import reducer from './reducers'
+import { render } from "react-dom";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import { createLogger } from "redux-logger";
+import thunk from "redux-thunk";
+import reducer from "./reducers";
 import App from "./containers/App";
 import "./index.css";
-import { getCities } from './actions'
+import { getCities } from "./actions";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const theme = createMuiTheme({
 	palette: {
@@ -19,20 +20,18 @@ const theme = createMuiTheme({
 	}
 });
 
-const middleware = [ thunk ];
-if (process.env.REACT_APP_STAGE !== 'prod') {
-  middleware.push(createLogger());
+const middleware = [thunk];
+if (process.env.REACT_APP_STAGE !== "prod") {
+	middleware.push(createLogger());
 }
 
-const store = createStore(
-	reducer,
-	applyMiddleware(...middleware)
-);
+const store = createStore(reducer, applyMiddleware(...middleware));
 
-store.dispatch(getCities())
+store.dispatch(getCities());
 
 render(
 	<React.Fragment>
+		<CssBaseline />
 		<MuiThemeProvider theme={theme}>
 			<Provider store={store}>
 				<App />
