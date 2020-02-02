@@ -1,6 +1,6 @@
 import React from "react";
 import MapContainer from "../containers/MapContainer";
-import NavBarContainer from "../containers/NavBarContainer.js";
+import NavBarContainer from "../containers/NavBarContainer";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({

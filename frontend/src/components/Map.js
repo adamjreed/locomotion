@@ -1,21 +1,20 @@
 import React from "react";
 import { GoogleMap, useLoadScript, TransitLayer } from "@react-google-maps/api";
-import StationsContainer from '../containers/StationsContainer'
+import StationsContainer from "../containers/StationsContainer";
 
 const MapStyles = require("../data/map_styles.json");
 
 const Map = ({ map, currentCity, setMap, setZoom }) => {
-
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY
   });
 
   const renderMap = () => {
     const onZoomChanged = () => {
-      //seems like this gets called before the map actually get initialized, 
+      //seems like this gets called before the map actually get initialized,
       //so let's check that it exists to be safe
       if (map) {
-        setZoom(map.getZoom())
+        setZoom(map.getZoom());
       }
     };
 
@@ -46,12 +45,12 @@ const Map = ({ map, currentCity, setMap, setZoom }) => {
   }
 
   if (!isLoaded) {
-    return <div>Loading maps...</div>
+    return <div>Loading maps...</div>;
   } else if (currentCity) {
-    return renderMap(currentCity)
+    return renderMap(currentCity);
   }
 
   return <div>Select A City...</div>;
-}
+};
 
 export default Map;

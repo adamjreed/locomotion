@@ -4,12 +4,7 @@ import { setMap, setZoom } from "../actions";
 import Map from "../components/Map";
 
 const MapContainer = ({ map, currentCity, setMap, setZoom }) => (
-		<Map
-			map={map}
-			currentCity={currentCity}
-			setMap={setMap}
-			setZoom={setZoom}
-		/>
+	<Map map={map} currentCity={currentCity} setMap={setMap} setZoom={setZoom} />
 );
 
 const mapStateToProps = state => ({

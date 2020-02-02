@@ -2,19 +2,18 @@ import React from "react";
 import { Marker } from "@react-google-maps/api";
 import stationIcon from "../assets/station.png";
 
-const Station = ({zoom, lat, lng}) => {
-
+const Station = ({ zoom, lat, lng }) => {
 	const getIconSize = () => {
-    let size = 0;
+		let size = 0;
 
-    if (zoom > 15) {
-    	size = zoom * 1.5;
-    } else if (zoom > 8) {
-      size = zoom;
-    }
+		if (zoom > 15) {
+			size = zoom * 1.5;
+		} else if (zoom > 8) {
+			size = zoom;
+		}
 
-    return size
-	}
+		return size;
+	};
 
 	return (
 		<Marker
@@ -35,6 +34,6 @@ const Station = ({zoom, lat, lng}) => {
 			}}
 		/>
 	);
-}
+};
 
 export default Station;
