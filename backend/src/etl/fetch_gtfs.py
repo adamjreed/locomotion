@@ -17,7 +17,8 @@ def handler(event, context):
 
     print("last modified: " + lastModified)
 
-    lastDownloadedObj = s3.Object(bucketName, bucketPrefix + "last_modified.txt")
+    lastDownloadedObj = s3.Object(
+        bucketName, bucketPrefix + "last_modified.txt")
 
     try:
         # check for a file containing the last time we imported a feed
@@ -25,7 +26,8 @@ def handler(event, context):
         print("last downloaded: " + lastDownloaded)
         fileUpdated = (lastModified != lastDownloaded)
     except s3.meta.client.exceptions.NoSuchKey:
-        # if we don't have a stored lastModified date, we assume we're grabbing this feed for the first time
+        # if we don't have a stored lastModified date, we assume
+        # we're grabbing this feed for the first time
         fileUpdated = True
 
     if fileUpdated:
@@ -34,7 +36,18 @@ def handler(event, context):
             if file[-4:] == ".txt":
                 print("saving " + file)
                 contents = zipfile.read(file)
-                s3.Object(bucketName, bucketPrefix + "gtfs/" + file[:-4] + "/year=" + date.strftime("%Y") + "/month=" + date.strftime("%m") + "/day=" + date.strftime("%d") + "/" + file).put(Body=contents)
+                s3.Object(
+                    bucketName,
+                    "%sgtfs/%s/year=%s/month=%s/day=%s/%s" %
+                    (
+                        bucketPrefix,
+                        file[:-4],
+                        date.strftime("%Y"),
+                        date.strftime("%m"),
+                        date.strftime("%d"),
+                        file
+                    )
+                ).put(Body=contents)
 
         lastDownloadedObj.put(Body=lastModified)
     else:

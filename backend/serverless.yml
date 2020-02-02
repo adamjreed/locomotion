@@ -67,17 +67,23 @@ functions:
     environment:
       REDIS_HOST: ${self:custom.config.redis.host}
       REDIS_PORT: ${self:custom.config.redis.port}
+      CORS_ORIGIN: ${self:custom.config.cors.origin}
     events:
       - http:
           path: cities
           method: get
+          cors: 
+            origin: ${self:custom.config.cors.origin}
   stations:
     handler: src/api/stations.get
     timeout: 30
     environment:
       REDIS_HOST: ${self:custom.config.redis.host}
       REDIS_PORT: ${self:custom.config.redis.port}
+      CORS_ORIGIN: ${self:custom.config.cors.origin}
     events:
       - http:
           path: stations/{city_id}
           method: get
+          cors: 
+            origin: ${self:custom.config.cors.origin}
