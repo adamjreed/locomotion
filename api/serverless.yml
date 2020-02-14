@@ -62,7 +62,7 @@ functions:
           input:
             city: chicago
   cities:
-    handler: src/api/cities.get
+    handler: src/cities.get
     timeout: 30
     environment:
       REDIS_HOST: ${self:custom.config.redis.host}
@@ -75,7 +75,7 @@ functions:
           cors: 
             origin: ${self:custom.config.cors.origin}
   stations:
-    handler: src/api/stations.get
+    handler: src/stations.get
     timeout: 30
     environment:
       REDIS_HOST: ${self:custom.config.redis.host}
@@ -84,6 +84,19 @@ functions:
     events:
       - http:
           path: stations/{city_id}
+          method: get
+          cors: 
+            origin: ${self:custom.config.cors.origin}
+  trains:
+    handler: src/trains.get
+    timeout: 30
+    environment:
+      REDIS_HOST: ${self:custom.config.redis.host}
+      REDIS_PORT: ${self:custom.config.redis.port}
+      CORS_ORIGIN: ${self:custom.config.cors.origin}
+    events:
+      - http:
+          path: trains/{city_id}
           method: get
           cors: 
             origin: ${self:custom.config.cors.origin}
