@@ -21,7 +21,7 @@ def get(apiKey):
             name = line["@name"]
 
             # If there are no trains active, there won't be a "train" field
-            if line["train"] is None:
+            if "train" not in line:
                 continue
             # If there is only one train active, the API returns an object
             elif type(line["train"]) is dict:
