@@ -1,19 +1,21 @@
 import os
-import sys
 from io import BytesIO
 from zipfile import ZipFile
 from urllib.request import urlopen
 from datetime import datetime
 import boto3
-import json
+import argparse
 
 s3 = boto3.resource('s3')
-event = json.loads(sys.argv[1])
+parser = argparse.ArgumentParser()
+parser.add_argument('--city')
+parser.add_argument('--feed_url')
+args = parser.parse_args()
 bucketName = os.environ["BUCKET_NAME"]
-bucketPrefix = event["city"] + "/"
+bucketPrefix = args.city + "/"
 date = datetime.now()
 
-resp = urlopen(event["feed_url"])
+resp = urlopen(args.feed_url)
 lastModified = resp.info()["Last-Modified"]
 
 print("last modified: " + lastModified)
