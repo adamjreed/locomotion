@@ -17,13 +17,26 @@ const receiveStations = stations => ({
 	stations: stations
 });
 
-export const getStations = city => dispatch => {
+const receiveTrains = trains => ({
+	type: types.RECEIVE_TRAINS,
+	trains: trains
+});
+
+export const getTransitObjects = city => dispatch => {
 	if (city) {
 		api.stations(city, stations => {
 			dispatch(receiveStations(stations));
 		});
-	} else {
-		dispatch(receiveStations([]));
+
+		api.trains(city, trains => {
+			dispatch(receiveTrains(trains.trains));
+		});
+
+		setInterval(() => {
+			api.trains(city, trains => {
+				dispatch(receiveTrains(trains.trains));
+			});
+		}, 5000)
 	}
 };
 
@@ -33,7 +46,7 @@ export const setCity = city => dispatch => {
 		city: city
 	});
 
-	dispatch(getStations(city ? city.id : null));
+	dispatch(getTransitObjects(city ? city.id : null));
 };
 
 export const setMap = map => dispatch => {

@@ -4,7 +4,9 @@ export default (
     currentCity: null,
     zoom: 0,
     cities: [],
-    stations: []
+    routes: [],
+    stations: [],
+    trains: []
   },
   action
 ) => {
@@ -18,6 +20,11 @@ export default (
       return {
         ...state,
         stations: action.stations
+      };
+    case "RECEIVE_TRAINS":
+      return {
+        ...state,
+        trains: action.trains
       };
     case "SET_CITY":
       return {

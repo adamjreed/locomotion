@@ -11,6 +11,13 @@ import { getCities } from "./actions";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import WebFont from 'webfontloader';
+
+WebFont.load({
+  google: {
+    families: ['Roboto:300,400,500,700']
+  }
+});
 
 const theme = createMuiTheme({
 	palette: {

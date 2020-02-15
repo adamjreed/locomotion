@@ -1,6 +1,7 @@
 import React from "react";
 import { GoogleMap, useLoadScript, TransitLayer } from "@react-google-maps/api";
 import StationsContainer from "../containers/StationsContainer";
+import TrainsContainer from "../containers/TrainsContainer";
 
 const MapStyles = require("../data/map_styles.json");
 
@@ -36,6 +37,7 @@ const Map = ({ map, currentCity, setMap, setZoom }) => {
       >
         <TransitLayer />
         <StationsContainer />
+        <TrainsContainer />
       </GoogleMap>
     );
   };
