@@ -4,6 +4,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import AutorenewIcon from '@material-ui/icons/Autorenew';
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const menu = [
 	{ label: "OFF", interval: null },
@@ -44,6 +45,7 @@ const RefreshMenu = ({ currentCity, setRefresh }) => {
 			>
 				<AutorenewIcon />
 				{buttonText}
+				<KeyboardArrowDownIcon />
 				
 			</Button>
 			<Menu
