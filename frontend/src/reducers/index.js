@@ -6,7 +6,8 @@ export default (
     cities: [],
     routes: [],
     stations: [],
-    trains: []
+    trains: [],
+    interval: null
   },
   action
 ) => {
@@ -41,6 +42,15 @@ export default (
       return {
         ...state,
         zoom: action.zoom
+      };
+    case "SET_REFRESH":
+      if (state.interval != null) {
+        clearInterval(state.interval);
+      }
+
+      return {
+        ...state,
+        interval: action.interval
       };
     default:
       return state;

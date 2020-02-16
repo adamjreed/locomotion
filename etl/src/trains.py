@@ -9,11 +9,12 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--city')
 parser.add_argument('--apiKey')
+parser.add_argument('--pollInterval', type=int)
 args = parser.parse_args()
 
 
 def load_cities(client):
-    s.enter(10, 1, load_cities, (client,))
+    s.enter(args.pollInterval, 1, load_cities, (client,))
     trains = client.get(args.apiKey)
     load_redis("trains_" + args.city, trains)
     print('{"success":true}')

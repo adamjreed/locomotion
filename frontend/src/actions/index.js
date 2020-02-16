@@ -32,11 +32,7 @@ export const getTransitObjects = city => dispatch => {
 			dispatch(receiveTrains(trains.trains));
 		});
 
-		setInterval(() => {
-			api.trains(city, trains => {
-				dispatch(receiveTrains(trains.trains));
-			});
-		}, 5000)
+		dispatch(setRefresh(city, 5000));
 	}
 };
 
@@ -63,3 +59,21 @@ export const setZoom = zoom => dispatch => {
 		zoom: zoom
 	});
 };
+
+export const setRefresh = (currentCity, refresh) => dispatch => {
+	let interval = null;
+
+	if (refresh != null) {
+		interval = setInterval(() => {
+			api.trains(currentCity, trains => {
+				dispatch(receiveTrains(trains.trains));
+			});
+		}, refresh);
+	}
+
+	dispatch({
+		type: types.SET_REFRESH,
+		interval: interval
+	});
+	
+}

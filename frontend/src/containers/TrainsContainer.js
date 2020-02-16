@@ -14,13 +14,13 @@ const TrainsContainer = ({ map, trains, zoom, routes }) => {
 		let rotate = train.heading
 
 		//if the train is pointing up and left, flip it on the y-axis to keep the wheels left
-		if (rotate > 320 && rotate <= 365) {
+		if (rotate > 314 && rotate <= 359) {
 			scale = "-1,1";
-			// rotate = (rotate - (rotate - 365) * 2)
+			rotate = (rotate - (rotate - 359) * 2)
 		//if the train is pointing down and left, flip it on the x-axis to keep the wheels down
-		} else if (rotate > 180 && rotate <= 320) {
+		} else if (rotate > 179 && rotate <= 314) {
 			scale = "1,-1"
-			rotate = (rotate - (rotate - 270) * 2)
+			rotate = (rotate - (rotate - 269) * 2)
 		}
 
 		return (
@@ -35,7 +35,7 @@ const TrainsContainer = ({ map, trains, zoom, routes }) => {
 									fill: "#fff",
 									transform: "scale(" + scale + ") rotate(" + (rotate - 90) + "deg)",
 									strokeWidth: 1,
-									stroke: "#" + lineColor
+									stroke: "#000"
 								}}
 							/>
 						)
