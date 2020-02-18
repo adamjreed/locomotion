@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import TrainIcon from "./TrainIcon";
@@ -17,13 +17,18 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const NavBar = ({ children }) => {
+const NavBar = ({ children, theme }) => {
 	const classes = useStyles();
 
 	return (
 		<AppBar position="relative">
 			<Toolbar className={classes.toolbar}>
-				<TrainIcon fill="currentColor" className={classes.toolbarIcon} />
+				<TrainIcon
+					fill="currentColor"
+					secondaryFillColor={theme.palette.primary.main}
+					strokeWidth={0}
+					className={classes.toolbarIcon}
+				/>
 				<Typography
 					variant="h6"
 					color="inherit"
@@ -38,4 +43,4 @@ const NavBar = ({ children }) => {
 	);
 };
 
-export default NavBar;
+export default withTheme(NavBar);

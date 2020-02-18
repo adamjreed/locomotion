@@ -1,9 +1,8 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
-import AutorenewIcon from '@material-ui/icons/Autorenew';
+import AutorenewIcon from "@material-ui/icons/Autorenew";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const menu = [
@@ -35,7 +34,9 @@ const RefreshMenu = ({ currentCity, setRefresh }) => {
 		setAnchorEl(null);
 	};
 
-	return ( currentCity == null ? "" :
+	return currentCity == null ? (
+		""
+	) : (
 		<React.Fragment>
 			<Button
 				aria-controls="refresh-menu"
@@ -46,7 +47,6 @@ const RefreshMenu = ({ currentCity, setRefresh }) => {
 				<AutorenewIcon />
 				{buttonText}
 				<KeyboardArrowDownIcon />
-				
 			</Button>
 			<Menu
 				id="refresh-menu"

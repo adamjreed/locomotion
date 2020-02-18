@@ -31,11 +31,11 @@ const TrainsContainer = ({ map, trains, zoom, routes }) => {
 					encodeURIComponent(
 						ReactDOMServer.renderToString(
 							<TrainIcon
+								strokeWidth={1}
+								highlightFillColor={"#" + lineColor}
+								highlightFillOpacity={1}
 								style={{
-									fill: "#fff",
 									transform: "scale(" + scale + ") rotate(" + (rotate - 90) + "deg)",
-									strokeWidth: 1,
-									stroke: "#000"
 								}}
 							/>
 						)
