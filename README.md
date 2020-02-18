@@ -21,7 +21,7 @@ MVP:
 - [x] Build API proxy for third-party transit APIs
 - [x] Render trains from live results
 - [x] Animate trains on map
-- [ ] Loading and default static assets
+- [x] Loading and default static assets
 
 These are things that need to be done in order to reach what I'd consider a production-ready app:
 - [x] App hosted on CDN
@@ -37,3 +37,4 @@ Here are a few features I'd like to add over time:
 - [ ] Interactivity on stations and trains. Show upcoming trains for stations and show station arrival estimates for trains.
 - [ ] Reliability tracking on transit systems. Instead of just passing info to frontend, API saves it in a database and can report metrics like percentage of on-time arrivals per station, line, run, etc.
 - [ ] Smooth movement of trains based on velocity between polling intervals.
+- [ ] Add line color to train cars.
