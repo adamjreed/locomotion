@@ -56,7 +56,7 @@ const Map = ({ map, currentCity, setMap, setZoom }) => {
       return renderMap();
     }
 
-    return renderCardView(<RoomIcon className={classes.cardIcon} />, "Select a city...");
+    return renderCardView(<RoomIcon className={classes.cardIcon} htmlColor={"#cc0000"} />, "Select a city...");
   }
 
   const renderMap = () => {
