@@ -5,15 +5,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
-const useStyles = makeStyles(theme => ({
-	toolbarButton: {
-		margin: theme.spacing(1, 1.5)
-	}
-}));
-
 const CitiesMenu = ({ currentCity, cities, setCity }) => {
 	const [anchorEl, setAnchorEl] = React.useState(null);
-	const classes = useStyles();
 	const hasCities = cities.length > 0;
 	const buttonText = currentCity ? currentCity.name : "Select A City";
 	const onMenuItemClick = city => {
@@ -51,7 +44,6 @@ const CitiesMenu = ({ currentCity, cities, setCity }) => {
 				aria-controls="city-menu"
 				aria-haspopup="true"
 				onClick={onMenuOpen}
-				className={classes.toolbarButton}
 				color="inherit"
 			>
 				{buttonText}

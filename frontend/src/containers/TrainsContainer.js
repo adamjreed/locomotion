@@ -46,7 +46,6 @@ const TrainsContainer = ({ map, trains, zoom, routes }) => {
 				lng={parseFloat(train.lng)}
 				scale={2}
 				zIndex={2}
-				heading={train.heading}
 			/>
 		);
 	});

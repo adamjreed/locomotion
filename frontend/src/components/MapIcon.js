@@ -1,7 +1,7 @@
 import React from "react";
 import { Marker } from "@react-google-maps/api";
 
-const MapIcon = ({ icon, zoom, lat, lng, scale = 1, zIndex = 1, heading = 0 }) => {
+const MapIcon = ({ icon, zoom, lat, lng, scale = 1, zIndex = 1 }) => {
 	const getIconSize = () => {
 		let size = 0;
 
