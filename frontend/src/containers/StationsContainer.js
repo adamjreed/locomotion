@@ -1,12 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import Station from "../components/Station";
+import MapIcon from "../components/MapIcon";
+import stationIcon from "../assets/station.png";
 
 const StationsContainer = ({ map, stations, zoom }) => {
 	return stations.map((station, i) => {
 		return (
-			<Station
+			<MapIcon
 				key={i}
+				icon={stationIcon}
 				zoom={zoom}
 				lat={parseFloat(station.stop_lat)}
 				lng={parseFloat(station.stop_lon)}

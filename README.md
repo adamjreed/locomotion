@@ -18,13 +18,14 @@ MVP:
 - [x] React app to display a map
 - [x] Show stations on map
 - [x] Allow selection of cities dynamically
-- [ ] Build API proxy for third-party transit APIs
-- [ ] Render trains from live results
-- [ ] Animate trains on map
+- [x] Build API proxy for third-party transit APIs
+- [x] Render trains from live results
+- [x] Animate trains on map
+- [x] Loading and default static assets
 
 These are things that need to be done in order to reach what I'd consider a production-ready app:
 - [x] App hosted on CDN
-- [ ] DNS for app and api
+- [x] DNS for app and api
 - [ ] Error handling and reliability across the board (monitoring, retries, redundant nodes, etc)
 - [ ] Unit and integration tests
 - [ ] CI
@@ -35,3 +36,5 @@ Here are a few features I'd like to add over time:
 - [ ] More cities (just Chicago for now because their [developer resources](https://www.transitchicago.com/developers/) are awesome).
 - [ ] Interactivity on stations and trains. Show upcoming trains for stations and show station arrival estimates for trains.
 - [ ] Reliability tracking on transit systems. Instead of just passing info to frontend, API saves it in a database and can report metrics like percentage of on-time arrivals per station, line, run, etc.
+- [ ] Smooth movement of trains based on velocity between polling intervals.
+- [ ] Add line color to train cars.

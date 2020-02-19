@@ -14,7 +14,14 @@ const stations = (city, callback) => {
 		.then(json => callback(json));
 };
 
+const trains = (city, callback) => {
+	return fetch(`${baseUrl}/trains/${city}`)
+		.then(response => response.json())
+		.then(json => callback(json));
+};
+
 export default {
 	cities: cities,
-	stations: stations
+	stations: stations,
+	trains: trains
 };

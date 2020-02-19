@@ -2,32 +2,29 @@ import React from "react";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
+import AutorenewIcon from "@material-ui/icons/Autorenew";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
-const CitiesMenu = ({ currentCity, cities, setCity }) => {
+const menu = [
+	{ label: "OFF", interval: null },
+	{ label: "5s", interval: 5000 },
+	{ label: "10s", interval: 10000 },
+	{ label: "30s", interval: 30000 }
+];
+
+const RefreshMenu = ({ currentCity, setRefresh }) => {
 	const [anchorEl, setAnchorEl] = React.useState(null);
-	const hasCities = cities.length > 0;
-	const buttonText = currentCity ? currentCity.name : "Select A City";
-	const onMenuItemClick = city => {
+	const [buttonText, setButtonText] = React.useState(menu[1]["label"]);
+	const onMenuItemClick = menuItem => {
 		onMenuClose();
-		setCity(city);
+		setButtonText(menuItem.label);
+		setRefresh(currentCity.id, menuItem.interval);
 	};
-	const menuItems = hasCities ? (
-		[
-			<MenuItem key="select" onClick={() => onMenuItemClick(null)}>
-				Select A City
-			</MenuItem>,
-			...cities.map(city => (
-				<MenuItem key={city.id} onClick={() => onMenuItemClick(city)}>
-					{city.name}
-				</MenuItem>
-			))
-		]
-	) : (
-		<MenuItem>
-			<em>Loading cities...</em>
+	const menuItems = menu.map(item => (
+		<MenuItem key={item.label} onClick={() => onMenuItemClick(item)}>
+			{item.label}
 		</MenuItem>
-	);
+	));
 
 	const onMenuOpen = event => {
 		setAnchorEl(event.currentTarget);
@@ -37,19 +34,22 @@ const CitiesMenu = ({ currentCity, cities, setCity }) => {
 		setAnchorEl(null);
 	};
 
-	return (
+	return currentCity == null ? (
+		""
+	) : (
 		<React.Fragment>
 			<Button
-				aria-controls="city-menu"
+				aria-controls="refresh-menu"
 				aria-haspopup="true"
 				onClick={onMenuOpen}
 				color="inherit"
 			>
+				<AutorenewIcon />
 				{buttonText}
 				<KeyboardArrowDownIcon />
 			</Button>
 			<Menu
-				id="city-menu"
+				id="refresh-menu"
 				anchorEl={anchorEl}
 				keepMounted
 				open={Boolean(anchorEl)}
@@ -61,4 +61,4 @@ const CitiesMenu = ({ currentCity, cities, setCity }) => {
 	);
 };
 
-export default CitiesMenu;
+export default RefreshMenu;
