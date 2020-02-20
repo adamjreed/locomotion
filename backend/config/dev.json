@@ -1,0 +1,9 @@
+{
+	"bucket_name": "reedstudios-locomotion",
+	"secrets_key": "dev-locomotion",
+	"certificate_name": "*.reedstudios.dev",
+	"api_url": "locomotion-api.reedstudios.dev",
+	"cors": {
+		"origin": "*"	
+	}
+}

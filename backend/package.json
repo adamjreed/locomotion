@@ -1,0 +1,18 @@
+{
+  "name": "locomotion",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless": "^1.64.0",
+    "serverless-domain-manager": "^3.3.1",
+    "serverless-python-requirements": "^5.0.1"
+  },
+  "scripts": {
+    "image_build": "docker build -t 203780773431.dkr.ecr.us-east-1.amazonaws.com/locomotion src/etl",
+    "preimage_push": "$(aws ecr get-login --no-include-email) && aws ecr describe-repositories --repository-names locomotion || aws ecr create-repository --repository-name locomotion",
+    "image_push": "docker push 203780773431.dkr.ecr.us-east-1.amazonaws.com/locomotion:latest",
+    "deploy": "sls deploy --stage=dev",
+    "deploy:prod": "sls deploy --stage=prod"
+  }
+}
