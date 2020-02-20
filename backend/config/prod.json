@@ -4,6 +4,6 @@
 	"certificate_name": "*.reedallaboutit.io",
 	"api_url": "locomotion-api.reedallaboutit.io",
 	"cors": {
-		"origin": "locomotion.reedallaboutit.io"	
+		"origin": "https://locomotion.reedallaboutit.io"	
 	}
 }
