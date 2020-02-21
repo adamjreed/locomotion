@@ -15,7 +15,8 @@ const MapStyles = require("../data/map_styles.json");
 const useStyles = makeStyles({
   contentContainer: {
     display: 'flex',
-    height: '100vh',
+    minHeight: '100%',
+    flexGrow: '1',
     padding: 0
   },
   staticContainer: {
